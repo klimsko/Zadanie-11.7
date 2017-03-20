@@ -1,0 +1,72 @@
+.btn-delete {
+	float: right;
+	margin-left: 10px;
+}
+.panel-title {
+	float: left;
+	width: 85%;
+}
+.panel-heading {
+	min-height: 55px;
+	cursor: move;
+}
+.panel-body {
+	min-height: 134px;
+}
+.add-card {
+	margin-bottom: 10px;
+}
+.card {
+	border: 1px dotted #333;
+	border-radius: 10px;
+	margin-top: 5px;
+	min-height: 55px;
+	padding: 10px;
+	text-align: justify;
+	background: #F6F6F6;
+}
+.card-placeholder {
+	border: 2px dotted #3E6F11;
+	border-radius: 10px;
+	margin-top: 5px;
+	min-height: 55px;
+	padding: 10px;
+	background: #fff;
+}
+ul {
+	padding-left: 0;
+	list-style-type: none;
+	min-height: 55px;
+	margin-bottom: 0;
+}
+.create-column {
+	margin-bottom: 15px;
+}
+.fon {
+	position: relative;
+	background-image: url('http://i.piccy.info/i9/6da743c9ac136f0ee74b3eda3d68d74c/1489503982/214886/1128328/bg_1.jpg');
+	background-position: center;
+	height: 100vh;
+	background-size: cover;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+}
+.img-left {
+	position: absolute;
+	top: calc(100vh - 861px);
+	left: -80px;
+}
+.img-left img{
+	width: 100%;
+	height: auto;
+}
+.img-right {
+	position: absolute;
+	top: calc(100vh - 730px);
+	right: 0;
+}
+.container {
+	position: absolute;
+	top: 0;
+}
