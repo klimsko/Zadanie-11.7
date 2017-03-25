@@ -7,7 +7,7 @@ function Column(id, name) {
 
     function createColumn() {
       var $columnContainer = $('<div>').addClass('col-lg-4 col-md-4 col-sm-6 col-xs-12');
-      var $column = $('<div>').addClass('column panel panel-default');
+      var $column = $('<div>').addClass('column panel panel-default').attr('data', self.id);
       var $columnHeading = $('<div>').addClass('panel-heading');
       var $columnTitle = $('<h2>').addClass('panel-title').text(self.name+" self.id = "+self.id);
       var $columnTitleChange = $('<div>').attr('id', 'title_cotainer_change').append('<input type="text" id="title_val"> <button id="save_title">Save</button> </div>');

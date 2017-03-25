@@ -9,7 +9,7 @@ this.$element = createCard();
 
 function createCard() {
   var $card = $('<li>').addClass('card');
-  var $cardDescription = $('<p>').addClass('card-description').text(self.name+" self.id = "+self.id+" self.columnId = "+self.columnId);
+  var $cardDescription = $('<p>').addClass('card-description').text(self.name+" self.id = "+self.id+" self.columnId = "+self.columnId).attr('data', self.id);
   var $cardDelete = $('<button>').addClass('btn-delete btn btn-warning').text('x');
 
   $cardDelete.click(function(){
@@ -25,7 +25,7 @@ function createCard() {
   return $card;
 }
 
-    //self.moveCard();
+    // self.moveCard();
 
 
 
@@ -42,7 +42,7 @@ Card.prototype = {
       }
     });
   },
-  moveCard: function() {
+  moveCard: function(event) {
 //     var self = this;
 //     $.ajax({
 //     url: baseUrl + '/board',

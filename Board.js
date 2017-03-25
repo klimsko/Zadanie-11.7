@@ -10,7 +10,25 @@ var board = {
 function initSortable() {
     $('.column-card-list').sortable({
       connectWith: '.column-card-list',
-      placeholder: 'card-placeholder'
+      placeholder: 'card-placeholder',
+      receive: function( event, ui ) {
+        var cardId = $(ui.item).find('.card-description').attr('data');
+        var columnId = $(this).closest('.column.panel.panel-default').attr('data');
+
+        // console.log(cardId, columnId);
+
+        $.ajax({
+          url: baseUrl + '/card/' + cardId,
+          method: 'PUT',
+          data: {
+            id: cardId,
+            bootcamp_kanban_column_id: columnId
+          },
+          success: function(){
+            
+          }
+        });
+      }
     }).disableSelection();
   
     $('.column-container').sortable().disableSelection();
