@@ -5,6 +5,8 @@
 .panel-title {
 	float: left;
 	width: 85%;
+	text-decoration: underline;
+    cursor: pointer;
 }
 .panel-heading {
 	min-height: 55px;
@@ -69,4 +71,26 @@ ul {
 .container {
 	position: absolute;
 	top: 0;
+}
+
+#title_name{
+    position: relative;
+}
+#title_cotainer_change{
+    position: absolute;
+    width: 80%;
+    top: 0px;
+    background-color: #eee;
+    border: 1px solid #aaa;
+    padding: 7px;
+    display:none;
+}
+#title_val{
+    margin: 0;
+    width: 75%;
+}
+#save_title{
+    padding: 5px 10px 6px;
+    font-size: 11px;
+    float:right;
 }

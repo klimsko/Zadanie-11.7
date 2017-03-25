@@ -9,7 +9,8 @@ function Column(id, name) {
       var $columnContainer = $('<div>').addClass('col-lg-4 col-md-4 col-sm-6 col-xs-12');
       var $column = $('<div>').addClass('column panel panel-default');
       var $columnHeading = $('<div>').addClass('panel-heading');
-      var $columnTitle = $('<h2>').addClass('panel-title').text(self.name);
+      var $columnTitle = $('<h2>').addClass('panel-title').text(self.name+" self.id = "+self.id);
+      var $columnTitleChange = $('<div>').attr('id', 'title_cotainer_change').append('<input type="text" id="title_val"> <button id="save_title">Save</button> </div>');
       var $columnBody = $('<div>').addClass('panel-body');
       var $columnCardList = $('<ul>').addClass('column-card-list');
       var $columnDelete = $('<button>').addClass('btn-delete btn btn-warning').text('x');
@@ -18,6 +19,23 @@ function Column(id, name) {
       $columnDelete.click(function() {
               self.removeColumn();
       });
+
+      // Zmiana nazwy kolumny
+      $columnTitle.click(function(){
+        self.$element.find('#title_cotainer_change').show();
+                
+        self.$element.find('#save_title').click(function(){
+          var name = $('#title_val').val();
+          console.log(name);
+            self.changeTitleName(name);
+        });
+        
+        
+      });
+
+
+
+
       // Dodawanie karteczki po kliknięciu w przycisk:
       $columnAddCard.click(function(event) {
         var cardName = prompt('Wpisz nazwę karty');
@@ -31,7 +49,7 @@ function Column(id, name) {
                   bootcamp_kanban_column_id: self.id
                 },
                 success: function(response) {
-                  var card = new Card(response.id, cardName);
+                  var card = new Card(response.id, cardName, self.id);
                   self.createCard(card);
                 }
         });
@@ -42,6 +60,7 @@ function Column(id, name) {
       $column.append($columnHeading)
         .append($columnBody);
       $columnHeading.append($columnTitle)
+        .append($columnTitleChange)
         .append($columnDelete);
       $columnBody.append($columnAddCard)
         .append($columnCardList);
@@ -62,5 +81,25 @@ Column.prototype = {
           self.$element.remove();
         }
       });
+    },
+
+    changeTitleName: function(value) {
+      //var title = prompt('Enter new title name');
+      var self = this;
+      $('#title_cotainer_change').remove();
+      $.ajax({
+        url: baseUrl + '/column/' + self.id,
+        method: 'PUT',
+        data: {
+          id: self.id,
+          name: value
+        },
+        success: function(response){
+
+          self.$element.find('.panel-title').text(value);
+          
+        }
+      });
     }
+
 };
