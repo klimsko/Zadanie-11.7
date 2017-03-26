@@ -6,11 +6,13 @@ function Column(id, name) {
     this.$element = createColumn();
 
     function createColumn() {
-      var $columnContainer = $('<div>').addClass('col-lg-4 col-md-4 col-sm-6 col-xs-12');
+      var $columnContainer = $('<div>').addClass('col-lg-4 col-md-6 col-sm-6 col-xs-12');
       var $column = $('<div>').addClass('column panel panel-default').attr('data', self.id);
       var $columnHeading = $('<div>').addClass('panel-heading');
-      var $columnTitle = $('<h2>').addClass('panel-title').text(self.name+" self.id = "+self.id);
-      var $columnTitleChange = $('<div>').attr('id', 'title_cotainer_change').append('<input type="text" id="title_val"> <button id="save_title">Save</button> </div>');
+      var $columnTitle = $('<h2>').addClass('panel-title').text(self.name);
+      var $columnTitleChange = $('<div>').addClass('title_cotainer_change');
+      var $columnTitleInput = $('<input type="text">').addClass('title_val');
+      var $columnTitleInputBtn = $('<button>').addClass('save_title').text('Save');
       var $columnBody = $('<div>').addClass('panel-body');
       var $columnCardList = $('<ul>').addClass('column-card-list');
       var $columnDelete = $('<button>').addClass('btn-delete btn btn-warning').text('x');
@@ -21,20 +23,17 @@ function Column(id, name) {
       });
 
       // Zmiana nazwy kolumny
-      $columnTitle.click(function(){
-        self.$element.find('#title_cotainer_change').show();
+     $columnTitle.click(function(){
+        
+        $columnTitleChange.show();
                 
-        self.$element.find('#save_title').click(function(){
-          var name = $('#title_val').val();
+        $columnTitleInputBtn.click(function(){
+          var name = $columnTitleInput.val();
           console.log(name);
             self.changeTitleName(name);
         });
-        
-        
+               
       });
-
-
-
 
       // Dodawanie karteczki po kliknięciu w przycisk:
       $columnAddCard.click(function(event) {
@@ -62,6 +61,8 @@ function Column(id, name) {
       $columnHeading.append($columnTitle)
         .append($columnTitleChange)
         .append($columnDelete);
+      $columnTitleChange.append($columnTitleInput)
+        .append($columnTitleInputBtn);
       $columnBody.append($columnAddCard)
         .append($columnCardList);
       return $columnContainer;
@@ -84,9 +85,8 @@ Column.prototype = {
     },
 
     changeTitleName: function(value) {
-      //var title = prompt('Enter new title name');
       var self = this;
-      $('#title_cotainer_change').remove();
+      self.$element.find('.title_cotainer_change').hide();
       $.ajax({
         url: baseUrl + '/column/' + self.id,
         method: 'PUT',

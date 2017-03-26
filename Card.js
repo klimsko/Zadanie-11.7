@@ -1,34 +1,43 @@
 function Card(id, name, columnId) {
   var self = this;
 
-this.id = id;
-this.name = name || 'Nie podano nazwy';
-this.columnId = columnId;
-this.$element = createCard();
+  this.id = id;
+  this.name = name || 'Nie podano nazwy';
+  this.columnId = columnId;
+  this.$element = createCard();
 
 
-function createCard() {
-  var $card = $('<li>').addClass('card');
-  var $cardDescription = $('<p>').addClass('card-description').text(self.name+" self.id = "+self.id+" self.columnId = "+self.columnId).attr('data', self.id);
-  var $cardDelete = $('<button>').addClass('btn-delete btn btn-warning').text('x');
+  function createCard() {
+    var $card = $('<li>').addClass('card');
+    var $cardDescription = $('<p>').addClass('card-description').text(self.name).attr('data', self.id);
+    var $cardEditNotice = $('<div>').addClass('card-edit').text('DoubleClick to edit');
+    var $cardDelete = $('<button>').addClass('btn-delete btn btn-warning').text('x');
+    var $cardOk = $('<span aria-hidden="true">').addClass('glyphicon glyphicon-ok');
 
-  $cardDelete.click(function(){
-          self.removeCard();
-  });
+    $cardDelete.click(function(){
+      alert("Card ID: "+self.id+" has been deleted");
+            self.removeCard();
+    });
 
-  // $card.click(function(){
-  //         self.moveCard();
-  // });
+    $card.dblclick(function() {
+      $cardOk.show();
+      $cardDescription.attr('contenteditable', 'true');
+      $cardOk.click(function(){
+        $cardDescription.attr('contenteditable', 'false');
+        var description = $cardDescription.text();
+        self.renameCardDescription(description);
+      });
+      
+    });
 
-  $card.append($cardDelete)
-    .append($cardDescription);
-  return $card;
-}
+    $card.append($cardDelete)
+      .append($cardDescription)
+      .append($cardOk)
+      .append($cardEditNotice);
+    return $card;
 
-    // self.moveCard();
-
-
-
+  }
+ 
 }
 
 Card.prototype = {
@@ -42,16 +51,20 @@ Card.prototype = {
       }
     });
   },
-  moveCard: function(event) {
-//     var self = this;
-//     $.ajax({
-//     url: baseUrl + '/board',
-//     method: 'GET',
-//     success: function(response) {
-//       console.log(response.columnId);
-//     }
-// });
+  renameCardDescription: function(val) {
+    var self = this;
 
-    
+    $.ajax({
+          url: baseUrl + '/card/' + self.id,
+          method: 'PUT',
+          data: {
+            id: self.id,
+            name: val,
+            bootcamp_kanban_column_id: self.columnId
+          },
+          success: function(){
+            self.$element.find('.glyphicon').hide();
+          }
+    });
   }
 }

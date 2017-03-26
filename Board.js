@@ -14,14 +14,14 @@ function initSortable() {
       receive: function( event, ui ) {
         var cardId = $(ui.item).find('.card-description').attr('data');
         var columnId = $(this).closest('.column.panel.panel-default').attr('data');
-
-        // console.log(cardId, columnId);
-
+        var cardDescription = $(ui.item).find('.card-description').text();
+        
         $.ajax({
           url: baseUrl + '/card/' + cardId,
           method: 'PUT',
           data: {
             id: cardId,
+            name: cardDescription,
             bootcamp_kanban_column_id: columnId
           },
           success: function(){
