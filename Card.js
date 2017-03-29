@@ -53,14 +53,14 @@ Card.prototype = {
   },
   renameCardDescription: function(val) {
     var self = this;
-
+    var currentColumnId = self.$element.closest('.column.panel.panel-default').attr('data');
     $.ajax({
           url: baseUrl + '/card/' + self.id,
           method: 'PUT',
           data: {
             id: self.id,
             name: val,
-            bootcamp_kanban_column_id: self.columnId
+            bootcamp_kanban_column_id: currentColumnId
           },
           success: function(){
             self.$element.find('.glyphicon').hide();
