@@ -2,15 +2,17 @@ var board = {
     name: 'Tablica Kanban',
     createColumn: function(column) {
       this.$element.append(column.$element);
-      initSortable();
+      addSortable();
     },
     $element: $('#board .column-container')
 };
 
-function initSortable() {
+function addSortable() {
+    $('.card').css('cursor', 'move');
     $('.column-card-list').sortable({
       connectWith: '.column-card-list',
       placeholder: 'card-placeholder',
+      disabled: false,
       receive: function( event, ui ) {
         var cardId = $(ui.item).find('.card-description').attr('data');
         var columnId = $(this).closest('.column.panel.panel-default').attr('data');
@@ -31,9 +33,17 @@ function initSortable() {
       }
     }).disableSelection();
   
-    $('.column-container').sortable().disableSelection();
-  }
+    return false;
+    //$('.column-container').sortable().disableSelection();
+  };
 
+function disableSortable(){
+  $('.card').css('cursor', 'default');
+  $('.column-card-list').sortable({
+    disabled: true
+  }).enableSelection();
+  return false;
+};
 
 $('.create-column')
   .click(function() {

@@ -19,11 +19,15 @@ function Card(id, name, columnId) {
             self.removeCard();
     });
 
+
+
     $card.dblclick(function() {
+      disableSortable();
       $cardOk.show();
       $cardDescription.attr('contenteditable', 'true');
       $cardOk.click(function(){
         $cardDescription.attr('contenteditable', 'false');
+        addSortable();
         var description = $cardDescription.text();
         self.renameCardDescription(description);
       });
