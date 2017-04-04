@@ -1,3 +1,6 @@
+body {
+	background-color: #201F23;
+}
 .btn-delete {
 	float: right;
 	margin-left: 10px;
@@ -6,7 +9,6 @@
 	float: left;
 	max-width: 82%;
 	text-decoration: underline;
-    cursor: pointer;
     line-height: 34px;
     white-space: nowrap;
     overflow: hidden;
@@ -61,27 +63,33 @@ ul {
 	margin-bottom: 15px;
 }
 .fon {
-	position: relative;
+	position: fixed;
+	top: 0;
 	background-image: url('http://i.piccy.info/i9/6da743c9ac136f0ee74b3eda3d68d74c/1489503982/214886/1128328/bg_1.jpg');
 	background-position: center;
-	height: 100vh;
+	height: 100%;
+	width: 100%;
 	background-size: cover;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
+	z-index: -2;
 }
 .img-left {
-	position: absolute;
-	top: calc(100vh - 861px);
+	position: fixed;
+	bottom: 0;
 	left: -80px;
+	z-index: -1;
+}
+.img-left img, .img-right img {
+	width: 100%;
+	height: auto;
 }
 .img-right {
-	position: absolute;
-	top: calc(100vh - 730px);
+	position: fixed;
+	bottom: 0;
 	right: 0;
+	z-index: -1;
 }
 .container {
-	z-index: 2;
+	z-index: 1;
 	max-width: 80%;
 }
 
@@ -91,8 +99,6 @@ ul {
     top: 14px;
     left: 15px;
     background-color: #f5f5f5;
-    /*border: 1px solid #aaa;*/
-    /*padding: 7px;*/
     display:none;
 }
 .title_val{
