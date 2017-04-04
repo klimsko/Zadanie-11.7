@@ -6,7 +6,7 @@ function Column(id, name) {
     this.$element = createColumn();
 
     function createColumn() {
-      var $columnContainer = $('<div>').addClass('col-lg-4 col-md-6 col-sm-6 col-xs-12');
+      var $columnContainer = $('<div>').addClass('col-lg-4 col-md-6 col-sm-12 col-xs-12');
       var $column = $('<div>').addClass('column panel panel-default').attr('data', self.id);
       var $columnHeading = $('<div>').addClass('panel-heading');
       var $columnTitle = $('<h2>').addClass('panel-title').text(self.name);

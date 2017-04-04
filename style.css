@@ -84,7 +84,7 @@ ul {
 }
 .img-right {
 	position: fixed;
-	bottom: 0;
+	bottom: -50px;
 	right: 0;
 	z-index: -1;
 }
