@@ -16,7 +16,6 @@ body {
 }
 .panel-heading {
 	min-height: 55px;
-	cursor: move;
 	position: relative;
 }
 .panel-body {
@@ -34,6 +33,7 @@ body {
 	padding: 10px;
 	text-align: justify;
 	background: #F6F6F6;
+	cursor: move;
 }
 .card-description {
 	max-width: 84%;
@@ -65,7 +65,7 @@ ul {
 .fon {
 	position: fixed;
 	top: 0;
-	background-image: url('http://i.piccy.info/i9/6da743c9ac136f0ee74b3eda3d68d74c/1489503982/214886/1128328/bg_1.jpg');
+	background-image: url('bg_1.jpg');
 	background-position: center;
 	height: 100%;
 	width: 100%;

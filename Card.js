@@ -15,7 +15,6 @@ function Card(id, name, columnId) {
     var $cardOk = $('<span aria-hidden="true">').addClass('glyphicon glyphicon-ok');
 
     $cardDelete.click(function(){
-      alert("Card ID: "+self.id+" has been deleted");
             self.removeCard();
     });
 
