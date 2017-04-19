@@ -2,7 +2,7 @@ function Column(id, name) {
     var self = this;
 
     this.id = id;
-    this.name = name || 'Nie podano nazwy';
+    this.name = name || 'Name is not declared';
     this.$element = createColumn();
 
     function createColumn() {
@@ -16,7 +16,7 @@ function Column(id, name) {
       var $columnBody = $('<div>').addClass('panel-body');
       var $columnCardList = $('<ul>').addClass('column-card-list');
       var $columnDelete = $('<button>').addClass('btn-delete btn btn-warning').text('x');
-      var $columnAddCard = $('<button>').addClass('add-card btn btn-info').text('Dodaj kartę');
+      var $columnAddCard = $('<button>').addClass('add-card btn btn-info').text('Add card');
       
       $columnDelete.click(function() {
               self.removeColumn();
@@ -29,18 +29,18 @@ function Column(id, name) {
                 
         $columnTitleInputBtn.click(function(){
           var name = $columnTitleInput.val();
-          console.log(name);
-            self.changeTitleName(name);
+          self.changeTitleName(name);
         });
                
       });
 
       // Dodawanie karteczki po kliknięciu w przycisk:
       $columnAddCard.click(function(event) {
-        var cardName = prompt('Wpisz nazwę karty');
+        var cardName = prompt('Please add a card description');
         event.preventDefault();
 
-        $.ajax({
+        if (cardName !== null){
+          $.ajax({
                 url: baseUrl + '/card',
                 method: 'POST',
                 data: {
@@ -51,7 +51,8 @@ function Column(id, name) {
                   var card = new Card(response.id, cardName, self.id);
                   self.createCard(card);
                 }
-        });
+          });
+        }
 
       });
 
@@ -87,19 +88,24 @@ Column.prototype = {
     changeTitleName: function(value) {
       var self = this;
       self.$element.find('.title_cotainer_change').hide();
-      $.ajax({
-        url: baseUrl + '/column/' + self.id,
-        method: 'PUT',
-        data: {
-          id: self.id,
-          name: value
-        },
-        success: function(response){
+      console.log(value);
+      if (value != '' && value.length > 0){
 
-          self.$element.find('.panel-title').text(value);
-          
-        }
-      });
+        $.ajax({
+          url: baseUrl + '/column/' + self.id,
+          method: 'PUT',
+          data: {
+            id: self.id,
+            name: value
+          },
+          success: function(response){
+
+            self.$element.find('.panel-title').text(value);
+            
+          }
+        });
+
+      }
     }
 
 };

@@ -2,7 +2,7 @@ function Card(id, name, columnId) {
   var self = this;
 
   this.id = id;
-  this.name = name || 'Nie podano nazwy';
+  this.name = name || 'Description is not declared';
   this.columnId = columnId;
   this.$element = createCard();
 
